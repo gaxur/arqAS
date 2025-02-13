@@ -4,7 +4,9 @@ abstract class Suscriptor {
         this.nombre = _nombre;
     }
 
-    String getNombre() { return this.nombre; }
-    void setNombre(String nuevoNombre) {this.nombre = nuevoNombre;}
-    public abstract void update();
+    public String getNombre() { return this.nombre; }
+    public void setNombre(String nuevoNombre) {this.nombre = nuevoNombre;}
+    public abstract void update(boolean nuevoEstado);
+    public abstract void setEvento(EventoNotificacion evento);
+    public abstract EventoNotificacion getEvento();
 }

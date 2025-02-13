@@ -1,35 +1,44 @@
 public class CanalYtConcreto extends CanalYt {
-    private boolean videoNuevo = false; // realmente no hace falta
-    private String nombreCanal = "";
+    private boolean videoNuevo = false;
     
     @Override
-    void añadirSuscriptor(Suscriptor s){
+    public void agnadirSuscriptor(Suscriptor s, EventoNotificacion evento){
         suscriptores.add(s);
+        s.setEvento(evento);
+        System.out.println(s.getNombre() + " se ha suscrito a: " + this.nombreCanal);
     }
     
     @Override
-    void eliminarSuscriptor(Suscriptor s){
+    public void eliminarSuscriptor(Suscriptor s){
         suscriptores.remove(s);
+        System.out.println(s.getNombre() + " se ha desuscrito de: " + this.nombreCanal);
     }
     
     @Override
-    void notificarSuscriptores(){
+    public void notificarSuscriptores(boolean nuevoEstado, EventoNotificacion evento){
+        boolean nadie = false;
         for(Suscriptor s : suscriptores){
-            s.update();
+            if (evento == s.getEvento()){
+                s.update(nuevoEstado);
+                nadie = true;
+            }
         }
+        if (! nadie) {System.out.println("En este canal no hay nadie interesado en ese tipo de notificaciones");}
     }
     
-    CanalYt(String nombreCanal){
+    public CanalYtConcreto(String nombreCanal){
         super(nombreCanal);
         this.videoNuevo = false;
     }
 
-    boolean getState() {
+    public boolean getState() {
         return this.videoNuevo;
     }
 
-    void setState(boolean newState) {
+    public void setState(boolean newState, EventoNotificacion evento) {
         this.videoNuevo = newState;
+        notificarSuscriptores(newState,evento);
     }
+
 }
 

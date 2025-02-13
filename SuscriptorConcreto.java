@@ -1,21 +1,55 @@
 public class SuscriptorConcreto extends Suscriptor {
-    private CanalYt CanalYoutube;
+    private CanalYtConcreto CanalYoutube;
     private boolean suscriptorState = false;
+    private EventoNotificacion eventoSuscriptor;
 
-    public Suscriptor(CanalYt _CanalYoutube, String _nombre){
+    public SuscriptorConcreto(CanalYtConcreto _CanalYoutube, String _nombre){
         super(_nombre);
         this.CanalYoutube = _CanalYoutube;
     }
 
 
-    @Override
-    void update(CanalYt CanalYoutube){
-        System.out.println(nombre + " ha sido notificado sobre un nuevo video");
-        if (canal.getState()) {
-            System.out.println(nombre + " ha consultado: ¡Nuevo video disponible!");
+    public String printEvento(EventoNotificacion e) {
+        if(e == EventoNotificacion.NUEVO_VIDEO){
+            return "Nuevo Video";
+        } else if(e == EventoNotificacion.EN_VIVO){
+            return "Transmisión en Vivo";
         } else {
-            System.out.println(nombre + " ha consultado: No hay nuevos videos.");
+            return "Anuncio Importante";
         }
-        suscriptorState = CanalYoutube.getState();
     }
+
+    @Override
+    public void update(boolean nuevoEstado){
+        System.out.println(this.getNombre() + " ha recibido una notificación.");
+        if (nuevoEstado) {
+            System.out.println(this.getNombre() + " ha consultado: ¡ " + this.printEvento(this.getEvento()) + " disponible !");
+        } else {
+            System.out.println(this.getNombre() + " ha consultado: No hay " + this.printEvento(this.getEvento()) + ".");
+        }
+        suscriptorState = suscriptorState == nuevoEstado ? suscriptorState : nuevoEstado;
+    }
+
+    @Override
+    public void setEvento(EventoNotificacion evento){
+        this.eventoSuscriptor = evento;
+    }
+
+    @Override
+    public EventoNotificacion getEvento(){
+        return this.eventoSuscriptor;
+    }
+
+    /**
+     *     @Override
+    public void update(boolean nuevoEstado, CanalYt canal){
+        System.out.println(this.getNombre() + " ha recibido una notificación.");
+        if (nuevoEstado) {
+            System.out.println(this.getNombre() + " ha consultado: ¡Nuevo video disponible!");
+        } else {
+            System.out.println(this.getNombre() + " ha consultado: No hay nuevos videos.");
+        }
+        suscriptorState = this.CanalYoutube.getState();
+    }
+     */
 }
