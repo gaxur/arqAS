@@ -1,5 +1,5 @@
 public class CanalYtConcreto extends CanalYt {
-    private boolean videoNuevo = false;
+    private boolean canalState = false;
     
     @Override
     public void agnadirSuscriptor(Suscriptor s, EventoNotificacion evento){
@@ -28,15 +28,15 @@ public class CanalYtConcreto extends CanalYt {
     
     public CanalYtConcreto(String nombreCanal){
         super(nombreCanal);
-        this.videoNuevo = false;
+        this.canalState = false;
     }
 
     public boolean getState() {
-        return this.videoNuevo;
+        return this.canalState;
     }
 
     public void setState(boolean newState, EventoNotificacion evento) {
-        this.videoNuevo = newState;
+        this.canalState = newState;
         notificarSuscriptores(newState,evento);
     }
 
