@@ -49,12 +49,6 @@ En la sección de collaborations, podemos ver que se realiza un cambio de estado
 
 Nuestra implementación realiza todo esto, sin embargo tenemos además algunas modificaciones para hacerlo algo más eficiente.
 
-- Explicación de cómo se materializa en tu implementación la/s variante/s de interacción/es que hayas introducido.
-
-
-- ¿Has introducido algún protocolo que ayude a los observadores a descubrir qué parte del subject ha cambiado?
-
-
 - Si se implementa alguna de las mejoras que se proponen en la sección de implementación del documento proporcionado en Moodle sobre el patrón Observer, hay
   de explicarla al profesor. Se valorarán especialmente los apartados 6 y 7 de dicha sección (modelo push and pull y especificar modificaciones de interés explícitamente).
 
